@@ -20,6 +20,10 @@ wire [4:0] rs2;       // rs2 field of instruction
 wire [6:0] funct7;    // funct7 field of instruction
 wire [4:0] shamt;     // shamt field of instruction
 wire [31:0] imm;      // immediate value after sign extension
+wire [31:0] rd_data;
+wire [31:0] rs1_data;
+wire [31:0] rs2_data;
+wire write_enable_regFile; 
 
 
 assign address = PC;
@@ -48,6 +52,8 @@ decoder decoder_obj(
     .shamt(shamt),
     .imm(imm)
 );
+
+
 
 always @(posedge clock or posedge reset) begin
     if (reset) 
