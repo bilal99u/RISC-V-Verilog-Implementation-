@@ -31,7 +31,7 @@ assign data_in = 32'b00;
 assign read_write = 1'b0;
 assign F_INSN = data_out; 
 
-
+// write_enable reset gate logic here!!!!!!!
 
 imemory imem (
   .clock(clock),
