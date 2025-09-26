@@ -24,14 +24,16 @@ wire [31:0] rd_data;
 wire [31:0] rs1_data;
 wire [31:0] rs2_data;
 wire write_enable_regFile; 
+wire gated_write_enable_regFile;
 
 
 assign address = PC;
 assign data_in = 32'b00;
 assign read_write = 1'b0;
 assign F_INSN = data_out; 
+assign gated_write_enable_regFile = write_enable_regFile&(~reset);
 
-// write_enable reset gate logic here!!!!!!!
+
 
 imemory imem (
   .clock(clock),
@@ -53,7 +55,16 @@ decoder decoder_obj(
     .imm(imm)
 );
 
-
+register_file rf (
+    .clock(clock),
+    .rs1(rs1),
+    .rs2(rs2),
+    .rd(rd),
+    .rd_data(rd_data),
+    .write_enable(gated_write_enable_regFile),
+    .rs1_data(rs1_data),
+    .rs2_data(rs2_data)
+);
 
 always @(posedge clock or posedge reset) begin
     if (reset) 
