@@ -25,6 +25,7 @@ wire [31:0] rs1_data;
 wire [31:0] rs2_data;
 wire write_enable_regFile; 
 wire gated_write_enable_regFile;
+wire [8:0] operation_key; 
 
 
 assign address = PC;
@@ -32,7 +33,7 @@ assign data_in = 32'b00;
 assign read_write = 1'b0;
 assign F_INSN = data_out; 
 assign gated_write_enable_regFile = write_enable_regFile&(~reset);
-
+assign operation_key = {funct7[5], funct3, opcode[6:2]}; // this key will have the 9 bits which distinguishes operations
 
 
 imemory imem (
