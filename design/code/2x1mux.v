@@ -6,5 +6,6 @@ module mux2to1 #(
     input  wire             sel,
     output wire [WIDTH-1:0] out
 );
+//mux
     assign out = sel ? in1 : in0;
 endmodule
