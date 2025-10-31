@@ -105,7 +105,7 @@ control control_unit (
     .BSel(BSel),                 
     .ALUSel(ALUSel),               
     .MemRW(MemRW),                
-    .RegWEn(write_enable_regFile),
+    .RegWEn(gated_write_enable_regFile),
     .WBSel(WBSel),
     .branch_taken(branch_taken),
     .d_mem_access_size(d_mem_access_size),

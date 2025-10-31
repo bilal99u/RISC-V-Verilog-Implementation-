@@ -11,6 +11,25 @@ module dmemory #()
 
 reg [7:0] memory_array [0:`MEM_DEPTH-1];
 wire [31:0] index = address;
+reg [31:0] temp_mem [0:`LINE_COUNT-1]; 
+
+
+initial begin
+    $readmemh(`MEM_PATH, temp_mem);
+    for (integer i = 0; i < `LINE_COUNT; i = i + 1) begin
+        if ((i * 4) + 3 < `MEM_DEPTH) begin
+            // little-endian: lowest byte at lowest address
+            memory_array[(i * 4)] = temp_mem[i][7:0];
+            memory_array[(i * 4) + 1] = temp_mem[i][15:8];
+            memory_array[(i * 4) + 2] = temp_mem[i][23:16];
+            memory_array[(i * 4) + 3] = temp_mem[i][31:24];
+        end else begin
+            $display("imemory init: temp_mem[%0d] would overflow memory, skipping", i);
+        end
+    end
+    $display("Memory initialized, %h,%h,%h,%h", memory_array[0][3],memory_array[0][2],memory_array[0][1],memory_array[0][0] );
+end
+
 
 always@(*) begin 
     if (read_write==0) begin
