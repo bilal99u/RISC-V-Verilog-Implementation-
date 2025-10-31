@@ -10,9 +10,7 @@ module dmemory #()
 );
 
 reg [7:0] memory_array [0:`MEM_DEPTH-1];
-localparam Mem_Base = 32'h0100_0000;
-wire [31:0] index = address - Mem_Base;
-wire out_of_range = (address < Mem_Base) || (address >= (Mem_Base + `MEM_DEPTH));
+wire [31:0] index = address;
 
 always@(*) begin 
     if (read_write==0) begin
@@ -57,11 +55,4 @@ always@(posedge clock) begin
         endcase
     end
 end
-
-always@(posedge clock) begin
-    if (out_of_range) begin
-        $display("Data Memory Error: Address %h is out of range.", address);
-    end
-end
-
 endmodule
