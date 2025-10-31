@@ -96,8 +96,10 @@ begin
                 d_mem_access_size = 2'b10;
             end
             default:
+            begin
             d_mem_access_size = 2'b10;
-
+            dmem_is_signed = 1'b1;
+            end
     endcase
 end
 
