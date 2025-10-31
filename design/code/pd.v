@@ -46,6 +46,7 @@ wire [31:0] d_mem_out;  // Memory data out
 wire [1:0] d_mem_access_size; // data memory access size, 
 wire dmem_is_signed; // is data signed in data memory access
 wire branch_taken;
+wire WB_regWEn;
 
 
 
@@ -105,7 +106,7 @@ control control_unit (
     .BSel(BSel),                 
     .ALUSel(ALUSel),               
     .MemRW(MemRW),                
-    .RegWEn(gated_write_enable_regFile),
+    .RegWEn(write_enable_regFile),
     .WBSel(WBSel),
     .branch_taken(branch_taken),
     .d_mem_access_size(d_mem_access_size),

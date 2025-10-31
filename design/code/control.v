@@ -54,52 +54,39 @@ WBSel: 00 -> writeback mux selects data from data memory (for load instructions)
 
 always@(*)
 begin
-    case(opcode_plus_funct3)
-            8'b00000000: // LB
+dmem_is_signed = 1'b1; 
+    case(funct3)
+            3'b000: // LB SB
             begin
                 dmem_is_signed = 1'b1; 
                 d_mem_access_size = 2'b00;
             end
-            8'b00100000: // LH
+            3'b001: // LH SH
             begin 
                 dmem_is_signed = 1'b1; 
                 d_mem_access_size = 2'b01;
             end
-            8'b01000000: // LW
+            3'b010: // LW SW
             begin 
                 dmem_is_signed = 1'b1; 
                 d_mem_access_size = 2'b10;
             end
-            8'b10000000: // LBU
+            3'b100: // LBU
             begin 
-                dmem_is_signed = 1'b0; 
+                if (opcode==5'b00000)
+                    dmem_is_signed = 1'b0; 
                 d_mem_access_size = 2'b00;
             end
-            8'b10100000: // LHU
+            3'b101: // LHU
             begin 
-                dmem_is_signed = 1'b0; 
+                if (opcode==5'b00000)
+                    dmem_is_signed = 1'b0; 
                 d_mem_access_size = 2'b01;
-            end
-            8'b00001000: // SB
-            begin 
-                dmem_is_signed = 1'b1; 
-                d_mem_access_size = 2'b00;
-            end
-            8'b00101000: // SH
-            begin 
-                dmem_is_signed = 1'b1; 
-                d_mem_access_size = 2'b01;
-            end
-            8'b01001000: // SW
-            begin 
-                dmem_is_signed = 1'b1; 
-                d_mem_access_size = 2'b10;
             end
             default:
             begin
             d_mem_access_size = 2'b10;
             dmem_is_signed = 1'b1;
-            
             end
     endcase
 end

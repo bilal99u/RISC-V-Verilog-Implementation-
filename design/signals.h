@@ -16,7 +16,7 @@
 `define D_IMM               imm
 `define D_SHAMT             shamt
 
-`define R_WRITE_ENABLE      write_enable_regFile
+`define R_WRITE_ENABLE      gated_write_enable_regFile
 `define R_WRITE_DESTINATION rd
 `define R_WRITE_DATA        rd_data
 `define R_READ_RS1          rs1
@@ -35,7 +35,7 @@
 `define M_DATA              rs2_data
 
 `define W_PC                PC
-`define W_ENABLE            gated_write_enable_regFile
+`define W_ENABLE            write_enable_regFile
 `define W_DESTINATION       rd
 `define W_DATA              rd_data
 
