@@ -182,7 +182,7 @@ begin
         ASel = 0;
         BSel = 1;
         RegWEn = 0;
-        MemRW = 0;  // write to data memory CHANGE TO 1 LATER
+        MemRW = 1'b1;  // write to data memory 
         ImmSel = 3'b100; // S-type immediate
     end
     9'b?_???_11000:  // Branch instructions (BEQ/BNE/BLT/BGE/BLTU/BGEU)
@@ -202,7 +202,7 @@ begin
         ImmSel = 3'b000; // I-type immediate
         ASel = 0; 
         BSel = 1; 
-        RegWEn = 1'b0; 
+        RegWEn = 1'b1; 
         WBSel = 2'b10; // writeback from PC + 4
         MemRW = 0;
     end
@@ -212,7 +212,7 @@ begin
         ImmSel = 3'b011; // J-type immediate
         ASel = 1'b1; 
         BSel = 1'b1; 
-        RegWEn = 1'b0; 
+        RegWEn = 1'b1; 
         WBSel = 2'b10; // writeback from PC + 4
         MemRW = 1'b0;
     end
@@ -222,7 +222,7 @@ begin
         ImmSel = 3'b010; // U-type immediate
         ASel = 1'b0;     // 
         BSel = 1'b1; 
-        RegWEn = 1'b0; 
+        RegWEn = 1'b1; 
         WBSel = 2'b01; // writeback from ALU as ALU passes immediate
         MemRW = 1'b0;
     end
@@ -232,7 +232,7 @@ begin
         ImmSel = 3'b010; // U-type immediate
         ASel = 1'b1;     // mux at port A of ALU selects value from PC
         BSel = 1'b1; // mux at port B of ALU selects value from immediate
-        RegWEn = 1'b0; 
+        RegWEn = 1'b1; 
         WBSel = 2'b01; // writeback from ALU as ALU does PC + immediate
         MemRW = 1'b0;
     end
