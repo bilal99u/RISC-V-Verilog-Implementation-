@@ -152,7 +152,7 @@ begin
         PCSel = 1'b0; 
         ASel = 1'b0; 
         BSel = 1'b0; 
-        RegWEn = 1'b0; 
+        RegWEn = 1'b1; 
         WBSel = 2'b01;  // writeback from ALU
         MemRW = 1'b0;
     end
@@ -161,7 +161,7 @@ begin
         PCSel = 1'b0; 
         ASel = 0; 
         BSel = 1; 
-        RegWEn = 1'b0; 
+        RegWEn = 1'b1; 
         WBSel = 2'b01;  // writeback from ALU
         MemRW = 1'b0;
         ImmSel = 3'b000; // I-type immediate
@@ -171,7 +171,7 @@ begin
         PCSel = 1'b0;
         ASel = 0;
         BSel = 1;
-        RegWEn = 1'b0;
+        RegWEn = 1'b1;
         WBSel = 2'b00; // writeback from data memory
         MemRW = 0; 
         ImmSel = 3'b000;
