@@ -35,7 +35,7 @@
 `define M_DATA              rs2_data
 
 `define W_PC                PC
-`define W_ENABLE            MemRW
+`define W_ENABLE            gated_write_enable_regFile
 `define W_DESTINATION       rd
 `define W_DATA              rd_data
 
