@@ -29,8 +29,6 @@ initial begin
             $display("imemory init: temp_mem[%0d] would overflow memory, skipping", i);
         end
     end
-    $display("I memory read successfully:  memory[0..3] = %h %h %h %h", 
-              memory[3], memory[2], memory[1], memory[0]);
 end
 
 

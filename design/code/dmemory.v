@@ -18,10 +18,9 @@ always@(*) begin
     if (read_write==0) begin
         case (access_size)
             2'b00:
-                data_out = (is_signed? {24'b{memory_array[index][7]}}:{24'b0, memory_array[index]});
+                data_out = (is_signed) ? {{24{memory_array[index][7]}}, memory_array[index]} : {24'b0, memory_array[index]};
             2'b01:
-                (is_signed ? {{16{memory_array[index+1][7]}}, memory_array[index+1], memory_array[index]}:{16'b0, memory_array[index+1], memory_array[index]})
-
+                data_out =(is_signed ? {{16{memory_array[index+1][7]}}, memory_array[index+1], memory_array[index]}:{16'b0, memory_array[index+1], memory_array[index]});
             2'b10:
                 data_out = {memory_array[index+3], memory_array[index+2], memory_array[index+1], memory_array[index]};
             default:
@@ -48,6 +47,13 @@ always@(posedge clock) begin
                 memory_array[index+2] <= data_in[23:16];
                 memory_array[index+3] <= data_in[31:24];
             end
+            default:
+            begin 
+                memory_array[index] <= data_in[7:0];
+                memory_array[index+1] <= data_in[15:8];
+                memory_array[index+2] <= data_in[23:16];
+                memory_array[index+3] <= data_in[31:24];
+            end
         endcase
     end
 end
@@ -55,7 +61,6 @@ end
 always@(posedge clock) begin
     if (out_of_range) begin
         $display("Data Memory Error: Address %h is out of range.", address);
-        $finish;
     end
 end
 

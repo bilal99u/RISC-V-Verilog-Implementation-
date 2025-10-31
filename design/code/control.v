@@ -11,7 +11,7 @@ module control (
     output reg         MemRW,
     output reg         RegWEn,
     output reg  [1:0]  WBSel,
-    output reg branch_taken
+    output reg branch_taken,
     output reg [1:0] d_mem_access_size,
     output reg dmem_is_signed
 );
